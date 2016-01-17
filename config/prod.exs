@@ -21,6 +21,11 @@ config :gatekeeper, Gatekeeper.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :gatekeeper, Gatekeeper.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  url: System.get_env("DATABASE_URL"),
+  pool_size: 20
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
