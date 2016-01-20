@@ -35,5 +35,7 @@ defmodule Gatekeeper.Endpoint do
     key: "_gatekeeper_key",
     signing_salt: "ycyKxC6Q"
 
+  plug CORSPlug
+
   plug Gatekeeper.Router
 end

@@ -10,7 +10,9 @@ defmodule Gatekeeper.Router do
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug :accepts, ["json", "json-api"]
+    # plug JaSerializer.ContentTypeNegotiation
+    # plug JaSerializer.Deserializer
   end
 
   scope "/", Gatekeeper do
@@ -20,7 +22,10 @@ defmodule Gatekeeper.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Gatekeeper do
-  #   pipe_through :api
-  # end
+  scope "/authenticate", Gatekeeper do
+    pipe_through :api
+
+    # get "/", AuthController, :index
+    get "/:code", AuthController, :code
+  end
 end
